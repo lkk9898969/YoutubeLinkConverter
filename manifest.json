@@ -1,0 +1,46 @@
+{
+    "manifest_version": 3,
+    "browser_specific_settings": {
+        "gecko": {
+            "id": "youtube-link-converter@lkk.com",
+            "strict_min_version": "142.0",
+            "data_collection_permissions": {
+                "required": [
+                    "none"
+                ],
+                "optional": []
+            }
+        }
+    },
+    "name": "YouTube Link Converter",
+    "version": "1.0.0",
+    "description": "複製乾淨的 YouTube 連結，並將 Shorts 頁面轉換為普通影片頁面",
+    "permissions": [
+        "contextMenus",
+        "clipboardWrite",
+        "activeTab",
+        "tabs"
+    ],
+    "host_permissions": [
+        "*://www.youtube.com/*"
+    ],
+    "background": {
+        "scripts": [
+            "background.js"
+        ]
+    },
+    "action": {
+        "default_icon": {
+            "16": "icons/icon-16x16.png",
+            "32": "icons/icon-32x32.png",
+            "48": "icons/icon-48x48.png"
+        },
+        "default_title": "轉換 YouTube Shorts 為普通影片"
+    },
+    "icons": {
+        "16": "icons/icon-16x16.png",
+        "32": "icons/icon-32x32.png",
+        "48": "icons/icon-48x48.png",
+        "128": "icons/icon-128x128.png"
+    }
+}
