@@ -1,15 +1,25 @@
 // 功能 1: 複製乾淨的 YouTube 連結
 // 在右鍵選單上創建選項
-browser.contextMenus.create({
-  id: "copy-clean-youtube-link",
-  title: "複製乾淨的 YouTube 連結",
-  contexts: ["link"],
-  targetUrlPatterns: [
-    "*://www.youtube.com/watch?v=*",
-    "*://youtube.com/watch?v=*",
-    "*://m.youtube.com/watch?v=*"
-  ]
-});
+// MV3 的背景腳本不會在瀏覽器啟動時自動執行，所以要監聽 onInstalled / onStartup
+// 事件來喚醒它並建立選單，否則重開瀏覽器後必須先點擴充功能圖示才會出現選單
+function createContextMenu() {
+  // 先清除舊的選單，避免重複 id 錯誤
+  browser.contextMenus.removeAll().then(() => {
+    browser.contextMenus.create({
+      id: "copy-clean-youtube-link",
+      title: "複製乾淨的 YouTube 連結",
+      contexts: ["link"],
+      targetUrlPatterns: [
+        "*://www.youtube.com/watch?v=*",
+        "*://youtube.com/watch?v=*",
+        "*://m.youtube.com/watch?v=*"
+      ]
+    });
+  });
+}
+
+browser.runtime.onInstalled.addListener(createContextMenu);
+browser.runtime.onStartup.addListener(createContextMenu);
 
 // 監聽右鍵選單點擊事件
 browser.contextMenus.onClicked.addListener((info, tab) => {
